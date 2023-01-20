@@ -1,11 +1,9 @@
-package com.roje.party.data;
+package net.lucynetwork.party.data;
 
-import com.roje.party.PartyMain;
+import net.lucynetwork.party.PartyMain;
 import net.lucynetwork.lucycore.data.Config;
-import org.bukkit.ChatColor;
 
 import java.util.List;
-import java.util.Map;
 
 public class StringData {
 
@@ -65,6 +63,12 @@ public class StringData {
     }
 
 
+    // 파티 초대 받음
+    public String invitedParty() {
+        return prefix + config.getString("messages.party.invitedparty");
+    }
+
+
     // 파티 초대 거절
     public String rejectParty() {
         return prefix + config.getString("messages.party.rejectparty");
@@ -98,6 +102,12 @@ public class StringData {
     // 이미 파티가 있음
     public String playerPartyExist() {
         return prefix + config.getString("messages.errors.ispartyexist");
+    }
+
+
+    // 이미 파티가 있음 (target)
+    public String targetPartyExist() {
+        return prefix + config.getString("messages.errors.targetpartyexist");
     }
 
 

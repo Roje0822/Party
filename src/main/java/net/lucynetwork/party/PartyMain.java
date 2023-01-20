@@ -1,12 +1,13 @@
-package com.roje.party;
+package net.lucynetwork.party;
 
-import com.roje.party.command.PartyCmd;
-import org.bukkit.Bukkit;
+import net.lucynetwork.party.command.PartyCmd;
+import net.lucynetwork.party.command.PartyTabComplete;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class PartyMain extends JavaPlugin {
 
     public static PartyMain plugin;
+
 
     @Override
     public void onEnable() {
@@ -19,14 +20,15 @@ public class PartyMain extends JavaPlugin {
 
         //command
         getCommand("파티").setExecutor(new PartyCmd());
+        getCommand("파티").setTabCompleter(new PartyTabComplete());
 
+        //event
 
         //config
         plugin = this;
         saveConfig();
 
     }
-
 
     public static JavaPlugin getPlugin() {
         return plugin;

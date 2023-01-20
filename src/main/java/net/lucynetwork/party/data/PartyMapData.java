@@ -1,4 +1,4 @@
-package com.roje.party.data;
+package net.lucynetwork.party.data;
 
 import org.bukkit.entity.Player;
 

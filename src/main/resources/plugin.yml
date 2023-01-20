@@ -1,15 +1,14 @@
 name: Party
-main: com.roje.party.PartyMain
-author: roje
-description: A Minecraft Party plugin
+main: net.lucynetwork.party.PartyMain
+author: Roje
+description: 루시 네트워크 파티 플러그인
 
 version: 1.0.0
-api-version: 1.19
+api-version: 1.13
 
-depend:
-  [ LucyCore ]
+depend: [ LucyCore ]
 
 commands:
-  파티:
-    description: /파티
-    usage: 잘못된 명령어입니다!
+  party:
+    aliases: [ 파티 ]
+    description: 파티를 참가하거나 초대하거나 수락하거나  생성하거나 API용도로 사용할 수 있는 짱짱 멋진 로제가 만든 파티 명령어

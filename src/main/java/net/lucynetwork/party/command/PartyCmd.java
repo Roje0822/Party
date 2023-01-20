@@ -1,7 +1,8 @@
-package com.roje.party.command;
+package net.lucynetwork.party.command;
 
-import com.roje.party.data.PartyData;
-import com.roje.party.data.StringData;
+import net.lucynetwork.party.api.PartyAPI;
+import net.lucynetwork.party.data.PartyData;
+import net.lucynetwork.party.data.StringData;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -9,13 +10,12 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
-import org.jetbrains.annotations.NotNull;
 
-import static com.roje.party.data.PartyMapData.invitePartyNameMap;
+import static net.lucynetwork.party.data.PartyMapData.invitePartyNameMap;
 
 public class PartyCmd implements CommandExecutor {
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
         if (sender instanceof Player player) {
 
@@ -36,7 +36,9 @@ public class PartyCmd implements CommandExecutor {
 
                 case "생성" -> {
                     if (args.length == 1) {
-                        config.usage().forEach(player::sendMessage);
+                        for (String usage : config.usage()) {
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', usage));
+                        }
                         return true;
                     }
 
@@ -61,15 +63,26 @@ public class PartyCmd implements CommandExecutor {
                 }
 
                 case "초대" -> {
-                    target = player.getServer().getPlayer(args[1]);
-                    partyData = new PartyData(target);
 
                     if (args.length == 1) {
-                        config.usage().forEach(player::sendMessage);
+                        for (String usage : config.usage()) {
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', usage));
+                        }
                         return true;
                     }
+                    try {
+                        target = player.getServer().getPlayer(args[1]);
+                        partyData = new PartyData(target);
+                    } catch (Exception e) {
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.playerNotFound())
+                                .replace("{name}", args[1]));
+                        return true;
+                    }
+
+
                     if (partyData.isPlayerPartyExist()) {
-                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.playerPartyExist()));
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.targetPartyExist())
+                                .replace("{target}", target.getName()));
                         return true;
                     }
                     partyData = new PartyData(player);
@@ -82,20 +95,20 @@ public class PartyCmd implements CommandExecutor {
                         System.out.println(2);
                         return true;
                     }
-                    if (target == null) {
-                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.playerNotFound()));
-                        System.out.println(3);
-                        return true;
-                    }
                     if (invitePartyNameMap.containsKey(target)) {
-                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.inviteAlready()));
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.inviteAlready())
+                                .replace("{target}", target.getName()));
                         System.out.println(4);
                         return true;
                     }
 
                     partyData.inviteParty(target);
+                    target.sendMessage(ChatColor.translateAlternateColorCodes('&', config.invitedParty()
+                                    .replace("{name}", player.getName()))
+                            .replace("{party}", partyData.getPlayerParty()));
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.inviteParty()
-                            .replace("{target}", target.getName())));
+                                    .replace("{target}", target.getName()))
+                            .replace("{party}", partyData.getPlayerParty()));
 
                     BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
                     scheduler.runTaskLater(Bukkit.getPluginManager().getPlugin("Party"), () -> {
@@ -112,15 +125,16 @@ public class PartyCmd implements CommandExecutor {
                 }
 
                 case "수락" -> {
+
                     if (!invitePartyNameMap.containsKey(player)) {
                         player.sendMessage(config.notinvite());
                         return true;
                     }
                     partyData = new PartyData(player);
 
+                    partyData.joinParty();
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.acceptParty()
                             .replace("{name}", invitePartyNameMap.get(player))));
-                    partyData.joinParty();
                     return true;
                 }
 
@@ -133,8 +147,8 @@ public class PartyCmd implements CommandExecutor {
                     partyData = new PartyData(player);
                     partyData.rejectParty();
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.rejectParty())
-                                    .replace("{name}", invitePartyNameMap.get(player))
-                                    .replace("{target}", player.getName()));
+                            .replace("{name}", invitePartyNameMap.get(player))
+                            .replace("{target}", player.getName()));
                     return true;
                 }
 
@@ -152,13 +166,28 @@ public class PartyCmd implements CommandExecutor {
                 }
 
                 case "강퇴" -> {
+                    if (args.length == 1) {
+                        for (String usage : config.usage()) {
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', usage));
+                        }
+                        return true;
+                    }
+                    if (Bukkit.getPlayer(args[1]) == null) {
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.playerNotFound()));
+                        return true;
+                    }
+                    if (!new PartyData(player).isPartyOwner()) {
+                        player.sendMessage(config.notOwner());
+                        return true;
+                    }
+
                     target = player.getServer().getPlayer(args[1]);
                     partyData = new PartyData(target);
 
                     if (!partyData.isInThisParty()) {
                         player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.notInParty()
                                         .replace("{target}", target.getName()))
-                                        .replace("{name}", partyData.getPlayerParty()));
+                                .replace("{name}", new PartyData(player).getPlayerParty()));
                         return true;
                     }
                     if (target == player) {
@@ -167,12 +196,13 @@ public class PartyCmd implements CommandExecutor {
                     }
 
                     partyData.kickParty();
+
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.kickParty()
                                     .replace("{target}", target.getName()))
-                                    .replace("{name}", partyData.getPlayerParty()));
+                            .replace("{name}", new PartyData(player).getPlayerParty()));
                     target.sendMessage(ChatColor.translateAlternateColorCodes('&', config.kickedParty()
                                     .replace("{target}", target.getName()))
-                                    .replace("{name}", partyData.getPlayerParty()));
+                            .replace("{name}", new PartyData(player).getPlayerParty()));
                     return true;
                 }
 
@@ -191,6 +221,16 @@ public class PartyCmd implements CommandExecutor {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.disbandParty()
                             .replace("{name}", partyData.getPlayerParty())));
                     return true;
+                }
+                default -> {
+                    for (String usage : config.usage()) {
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', usage));
+                    }
+                }
+                case "테스트" -> {
+                    PartyAPI partyAPI = new PartyAPI();
+                    partyAPI.getPartyMembers(partyAPI.getPlayerParty(player)).forEach(player::sendMessage);
+                    System.out.println(partyAPI.getPlayerParty(player));
                 }
             }
         } else {

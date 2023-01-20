@@ -1,12 +1,12 @@
-package com.roje.party.data;
+package net.lucynetwork.party.data;
 
-import com.roje.party.PartyMain;
+import net.lucynetwork.party.PartyMain;
 import net.lucynetwork.lucycore.data.Config;
 import org.bukkit.entity.Player;
 
 import java.util.List;
 
-import static com.roje.party.data.PartyMapData.invitePartyNameMap;
+import static net.lucynetwork.party.data.PartyMapData.invitePartyNameMap;
 
 public class PartyData {
 
@@ -50,11 +50,10 @@ public class PartyData {
      */
     public void joinParty() {
         partyData = new Config("party/" + invitePartyNameMap.get(player), PartyMain.getPlugin());
+        partyMembers = partyData.getStringList("party.member");
         partyMembers.add(player.getUniqueId().toString());
         partyData.setStringList("party.member", partyMembers);
         playerData.setString("party", invitePartyNameMap.get(player));
-        System.out.println(invitePartyNameMap.get(player));
-
         invitePartyNameMap.remove(player);
     }
 
@@ -86,7 +85,6 @@ public class PartyData {
      */
     public void inviteParty(Player target) {
         invitePartyNameMap.put(target, getPlayerParty());
-        System.out.println(getPlayerParty());
     }
 
 
@@ -99,7 +97,8 @@ public class PartyData {
      * 파티에서 추방합니다
      */
     public void kickParty() {
-        partyData.setStringList(name + "party.member", List.of("" + partyMembers.remove("" + player.getUniqueId())));
+        partyMembers.remove("" + player.getUniqueId());
+        partyData.setStringList("party.member", partyMembers);
         playerData.setString("party", null);
     }
 
@@ -108,8 +107,8 @@ public class PartyData {
      * @return 해당 파티에 플레이어가 존재하는지 여부
      */
     public boolean isInThisParty() {
-        List<String> members = partyData.getStringList("party.member");
-        return members.contains("" + player.getUniqueId());
+        partyMembers = partyData.getStringList("party.member");
+        return partyMembers.contains("" + player.getUniqueId());
     }
 
 
