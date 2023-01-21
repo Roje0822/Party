@@ -5,6 +5,7 @@ import net.lucynetwork.lucycore.data.Config;
 import org.bukkit.entity.Player;
 
 import java.util.List;
+import java.util.UUID;
 
 import static net.lucynetwork.party.data.PartyMapData.invitePartyNameMap;
 
@@ -155,7 +156,9 @@ public class PartyData {
 
 
     public String getPartyOwner() {
-        return partyData.getString("party.owner");
+        UUID uuid = UUID.fromString(partyData.getString("party.owner"));
+        return PartyMain.getPlugin().getServer().getOfflinePlayer(uuid).getName();
+
     }
 
 
@@ -170,4 +173,6 @@ public class PartyData {
     public void deleteParty() {
         partyData.deleteFile();
     }
+
+
 }

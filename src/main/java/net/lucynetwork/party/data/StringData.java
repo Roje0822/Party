@@ -11,7 +11,7 @@ public class StringData {
     private String prefix = config.getString("prefix");
 
     public List<String> usage() {
-        return List.of(prefix + config.getString("messages.usage"));
+        return List.of(prefix + config.getStringList("messages.usage"));
     }
 
 
@@ -166,5 +166,11 @@ public class StringData {
     public int inviteTime() {
         return config.getInt("time.invite");
     }
+
+
+    public String ownerLeave() {
+        return prefix + config.getString("messages.errors.ownerleave");
+    }
+
 
 }

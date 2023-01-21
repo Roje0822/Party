@@ -8,18 +8,26 @@ import java.util.List;
 
 public class PartyAPI {
 
-    private String name;
+    private final Player player;
+    private final Config config;
+
+    public PartyAPI(Player player) {
+        this.player = player;
+        this.config = new Config("data/" + player.getUniqueId(), PartyMain.getPlugin());
+    }
+
+    public PartyAPI(Player player, String name) {
+        this.player = player;
+        this.config = new Config("party/" + name, PartyMain.getPlugin());
+    }
 
 
-    public List<String> getPartyMembers(String name) {
-        Config config = new Config("party/" + name, PartyMain.getPlugin());
+    public List<String> getPartyMembers() {
         return config.getStringList("party.member");
     }
 
 
-    public String getPlayerParty(Player player) {
-        Config config = new Config("data/" + player.getUniqueId(), PartyMain.getPlugin());
+    public String getPlayerParty() {
         return config.getString("party");
     }
-
 }
