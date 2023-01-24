@@ -2,6 +2,9 @@ package net.lucynetwork.party;
 
 import net.lucynetwork.party.command.PartyCmd;
 import net.lucynetwork.party.command.PartyTabComplete;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class PartyMain extends JavaPlugin {
@@ -32,5 +35,15 @@ public class PartyMain extends JavaPlugin {
 
     public static JavaPlugin getPlugin() {
         return plugin;
+    }
+
+
+
+    @EventHandler
+    public void sexKarina(PlayerJoinEvent event) {
+
+        if(event.getPlayer().hasPlayedBefore()) {
+
+        }
     }
 }

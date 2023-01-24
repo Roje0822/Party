@@ -63,7 +63,8 @@ public class PartyData {
      * 파티를 나갑니다
      */
     public void leaveParty() {
-        partyData.setStringList( "party.member", List.of("" + partyMembers.remove("" + player.getUniqueId())));
+        partyMembers.remove("" + player.getUniqueId());
+        partyData.setStringList( "party.member", partyMembers);
         playerData.setString("party", null);
     }
 
@@ -78,6 +79,30 @@ public class PartyData {
             playerData.setString("party", null);
         });
         partyData.deleteFile();
+    }
+
+    /**
+     * 부파티장 선임
+     */
+    public void electCoOwner(UUID uuid) {
+        partyData.setString("party.coowner", uuid.toString());
+    }
+
+    /**
+     * 부파티장 해임
+     */
+    public void removeCoOwner() {
+        partyData.setString("party.coowner", null);
+    }
+
+
+    public String getCoOwner() {
+        return partyData.getString("party.coowner");
+    }
+
+
+    public Boolean isCoOwner() {
+        return partyData.getString("party.coowner").equals(player.getUniqueId().toString());
     }
 
 
@@ -156,9 +181,7 @@ public class PartyData {
 
 
     public String getPartyOwner() {
-        UUID uuid = UUID.fromString(partyData.getString("party.owner"));
-        return PartyMain.getPlugin().getServer().getOfflinePlayer(uuid).getName();
-
+        return partyData.getString("party.owner");
     }
 
 
@@ -172,6 +195,15 @@ public class PartyData {
      */
     public void deleteParty() {
         partyData.deleteFile();
+    }
+
+
+    public Boolean isPartyCoOwnerExist() {
+        if (partyData.getString("party.coowner") == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 

@@ -3,6 +3,7 @@ package net.lucynetwork.party.data;
 import net.lucynetwork.party.PartyMain;
 import net.lucynetwork.lucycore.data.Config;
 
+import java.util.Collections;
 import java.util.List;
 
 public class StringData {
@@ -11,13 +12,7 @@ public class StringData {
     private String prefix = config.getString("prefix");
 
     public List<String> usage() {
-        return List.of(prefix + config.getStringList("messages.usage"));
-    }
-
-
-    // 파티 정보
-    public List<String> partyInfo() {
-        return List.of(prefix + config.getString("messages.partyinfo"));
+        return List.of(prefix + config.getString("messages.usage"));
     }
 
 
@@ -117,12 +112,6 @@ public class StringData {
     }
 
 
-    // 파티장이 아님
-    public String notOwner() {
-        return prefix + config.getString("messages.errors.notowner");
-    }
-
-
     // 스스로 초대함
     public String inviteSelf() {
         return prefix + config.getString("messages.errors.inviteself");
@@ -171,6 +160,22 @@ public class StringData {
     public String ownerLeave() {
         return prefix + config.getString("messages.errors.ownerleave");
     }
+
+
+    public String coOwnerExist() {
+        return prefix + config.getString("messages.errors.coownerexist");
+    }
+
+
+    public String coOwnerSelf() {
+        return prefix + config.getString("messages.errors.coownerself");
+    }
+
+
+    public String noPermission() {
+        return prefix + config.getString("messages.errors.nopermission");
+    }
+
 
 
 }

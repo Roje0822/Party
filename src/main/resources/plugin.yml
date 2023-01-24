@@ -11,4 +11,4 @@ depend: [ LucyCore ]
 commands:
   party:
     aliases: [ 파티 ]
-    description: 파티를 참가하거나 초대하거나 수락하거나  생성하거나 API용도로 사용할 수 있는 짱짱 멋진 로제가 만든 파티 명령어
+    description: 파티 명령어
