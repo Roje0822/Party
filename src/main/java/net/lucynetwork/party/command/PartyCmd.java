@@ -40,7 +40,7 @@ public class PartyCmd implements CommandExecutor {
                 player.sendMessage(player.getName() + "님의 파티 정보");
                 player.sendMessage("파티 이름: " + partyData.getPlayerParty());
                 player.sendMessage("파티장: " + Bukkit.getOfflinePlayer(UUID.fromString(partyData.getPartyOwner())).getName());
-                player.sendMessage("부파티장: " + Bukkit.getOfflinePlayer(UUID.fromString(partyData.getCoOwner())).getName());
+                if (partyData.isPartyCoOwnerExist()) player.sendMessage("부파티장: " + Bukkit.getOfflinePlayer(UUID.fromString(partyData.getCoOwner())).getName());
                 List<String> partyMembers = partyData.getPartyMembers();
                 partyMembers.remove(partyData.getPartyOwner());
                 partyMembers.remove(partyData.getCoOwner());
@@ -52,7 +52,8 @@ public class PartyCmd implements CommandExecutor {
 
                     case "생성" -> {
                         if (args.length == 1) {
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.usage().toString()));
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.enterPartyName()));
+                            return true;
                         }
 
                         partyName = args[1];
@@ -97,7 +98,10 @@ public class PartyCmd implements CommandExecutor {
                             return true;
                         }
 
-
+                        if (player.getName().equals(target.getName())) {
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.inviteSelf()));
+                            return true;
+                        }
                         if (partyData.isPlayerPartyExist()) {
                             player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.targetPartyExist())
                                     .replace("{target}", target.getName()));
@@ -106,10 +110,6 @@ public class PartyCmd implements CommandExecutor {
                         partyData = new PartyData(player);
                         if (!partyData.isPlayerPartyExist()) {
                             player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.noparty()));
-                            return true;
-                        }
-                        if (target.getName().equals(player.getName())) {
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.inviteSelf()));
                             return true;
                         }
                         if (invitePartyNameMap.containsKey(target)) {

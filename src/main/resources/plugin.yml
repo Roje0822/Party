@@ -6,7 +6,7 @@ description: 루시 네트워크 파티 플러그인
 version: 1.0.0
 api-version: 1.13
 
-depend: [ LucyCore ]
+depend: [ RojeLib ]
 
 commands:
   party:

@@ -2,6 +2,7 @@ package net.lucynetwork.party;
 
 import net.lucynetwork.party.command.PartyCmd;
 import net.lucynetwork.party.command.PartyTabComplete;
+import net.starly.core.data.Config;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -29,8 +30,8 @@ public class PartyMain extends JavaPlugin {
 
         //config
         plugin = this;
-        saveConfig();
-
+        Config config = new Config("config", this);
+        config.loadDefaultConfig();
     }
 
     public static JavaPlugin getPlugin() {

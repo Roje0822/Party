@@ -1,9 +1,8 @@
 package net.lucynetwork.party.data;
 
 import net.lucynetwork.party.PartyMain;
-import net.lucynetwork.lucycore.data.Config;
+import net.starly.core.data.Config;
 
-import java.util.Collections;
 import java.util.List;
 
 public class StringData {
@@ -91,6 +90,12 @@ public class StringData {
     // 파티가 없음
     public String noparty() {
         return prefix + config.getString("messages.errors.noparty");
+    }
+
+
+    // 파티이름 입력
+    public String enterPartyName() {
+        return prefix + config.getString("messages.errors.enterpartyname");
     }
 
 

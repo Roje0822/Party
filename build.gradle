@@ -2,22 +2,24 @@ plugins {
     id 'java'
 }
 
-group 'net.lucynetwork.party'
-version '1.0.0'
+group 'net.starly.menu'
+version '1.0'
 
 repositories {
     mavenCentral()
     maven {
-        url = "http://idkNicks.xyz:8081/repository/maven-public/"
+        url = "http://feather-s.kr:8083/repository/maven-public/"
         allowInsecureProtocol = true
     }
 }
 
 dependencies {
+    //JAVA DEPENDENCIES
+    compileOnly "org.jetbrains:annotations:23.0.0"
 
-    // LUCY CORE
-    compileOnly "net.lucynetwork:lucycore:1.0.0"
+    //BUKKIT DEPENDENCIES
+    compileOnly "org.spigotmc:spigot-api:R0.1:1.12.2"
 
-    // BUKKIT API
-    compileOnly "org.bukkit.spigotmc:spigot-api:1.19.2-R0.1"
+    // OTHER DEPENDENCIES
+    compileOnly "net.starly.core:ST-Core:1.5.5"
 }

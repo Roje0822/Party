@@ -1,56 +1,107 @@
-#Minecraft Party Plugin
+# Minecraft Party Plugin
 
-#접두사
-prefix: "&7[&bParty&7] &f"
+# 접두사
+prefix: '&7[&bParty&7] &f'
 
-#에러 메세지
 messages:
-  usage: {}
+
+  #사용법
+  usage: '&c잘못된 명령어 입니다'
+
+  #파티
   party:
-    createparty: "&a파티를 생성하였습니다."
 
-    joinparty: "&a파티에 참가하였습니다."
+    #생성
+    createparty: '&a파티를 생성하였습니다.'
 
-    leaveparty: "&a파티를 나갔습니다."
+    #참가
+    joinparty: '&a파티에 참가하였습니다.'
 
-    disbandparty: "&a파티를 해체하였습니다."
+    #나감
+    leaveparty: '&a파티를 나갔습니다.'
 
-    kickparty: "&a파티에서 추방하였습니다."
+    #해체
+    disbandparty: '&a파티를 해체하였습니다.'
 
-    inviteparty: "&a파티 초대를 보냈습니다."
+    #추방
+    kickparty: '&a파티에서 추방하였습니다.'
 
-    rejectparty: "&c파티 초대를 거절하였습니다."
+    #초대
+    inviteparty: '&a파티 초대를 보냈습니다.'
 
-    acceptparty: "&a파티 초대를 수락하였습니다."
+    #초대받음
+    invitedparty: '&a{party}파티로 부터 초대를 받았습니다'
 
+    #거절
+    rejectparty: '&c파티 초대를 거절하였습니다.'
+
+    #수락
+    acceptparty: '&a파티 초대를 수락하였습니다.'
+
+  #에러
   errors:
 
-    noparty: "&c파티에 참가하지 않았습니다."
+    #파티 없음
+    noparty: '&c파티에 참가하지 않았습니다.'
 
-    inviteparty: "&a파티 초대를 보냈습니다."
+    #파티 이름 없음
+    enterpartyname: '파티이름 입력'
 
-    hasparty: "&c이미 파티가 있습니다."
+    #이미 파티있음
+    hasparty: '&c이미 파티가 있습니다.'
 
-    notinvite: "&c파티 초대를 받지 않았습니다."
+    #파티 초대 안받음
+    notinvite: '&c파티 초대를 받지 않았습니다.'
 
-    ispartyexist: "&c당신은 이미 파티가 존재합니다."
+    #이미 파티 존재
+    ispartyexist: '&c이미 파티가 존재합니다.'
 
-    partynameexist: "&c이미 존재하는 파티 이름입니다."
+    #이미 파티 이름 존재
+    partynameexist: '&c이미 존재하는 파티 이름입니다.'
 
-    playernotfound: "&c플레이어를 찾을 수 없습니다."
+    #플레이어 못찾음
+    playernotfound: '&c플레이어를 찾을 수 없습니다.'
 
-    inviteself: "&c자신에게는 초대할 수 없습니다."
+    #자신한테 초대
+    inviteself: '&c자신에게는 초대할 수 없습니다.'
 
-    expire: "&c파티 초대가 만료되었습니다."
+    #초대 만료 (player)
+    expire: '&c파티 초대가 만료되었습니다.'
 
-    expired: "&c파티 초대가 만료되었습니다."
+    #초대 만료 (target)
+    expired: '&c파티 초대가 만료되었습니다.'
 
-    inviteAlready: "&c이미 초대를 보냈습니다."
+    #이미 초대 받음
+    inviteAlready: '&c이미 초대를 보냈습니다.'
 
-    notinparty: "&c{target}은 파티에 참가하지 않았습니다."
+    #target이 파티 없음
+    notinparty: '&c{target}은 파티에 참가하지 않았습니다.'
 
-    kickself: "&c자신을 추방할 수 없습니다."
+    #자신 추방
+    kickself: '&c자신을 추방할 수 없습니다.'
 
-    coownerexist: "&c이미 부파티장이 있습니다."
+    #파티 주인아님
+    notowner: '&c파티의 주인이 아닙니다'
 
-    coownerself: "&c자신을 부파티장으로 지정할 수 없습니다."
+    #이미 파티 있음
+    targetpartyexist: '&c{target} 님은 이미 파티가 있습니다'
+
+    #파티장임
+    ownerleave: '&c파티장은 파티를 나갈 수 없습니다'
+
+    #부파티장 있음
+    coownerexist: '&c이미 부파티장이 있습니다.'
+
+    #본인 부파티장 지정
+    coownerself: '&c자신을 부파티장으로 지정할 수 없습니다.'
+
+    #부파티장 없음
+    nocoowner: '&c부파티장이 없습니다'
+
+    #이미 부파티장 존재
+    iscoownerexist: '&c이미 부파티장이 존재합니다'
+
+
+time:
+  #초대시간
+  invite: 10

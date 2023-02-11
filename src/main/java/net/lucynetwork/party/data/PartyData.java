@@ -1,7 +1,7 @@
 package net.lucynetwork.party.data;
 
 import net.lucynetwork.party.PartyMain;
-import net.lucynetwork.lucycore.data.Config;
+import net.starly.core.data.Config;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -78,7 +78,7 @@ public class PartyData {
             Config playerData = new Config("data/" + uuid, PartyMain.getPlugin());
             playerData.setString("party", null);
         });
-        partyData.deleteFile();
+        partyData.delete();
     }
 
     /**
@@ -194,7 +194,7 @@ public class PartyData {
      * 파티 삭제
      */
     public void deleteParty() {
-        partyData.deleteFile();
+        partyData.delete();
     }
 
 
