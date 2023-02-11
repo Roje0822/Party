@@ -29,7 +29,6 @@ public class PartyMain extends JavaPlugin {
         getCommand("파티").setTabCompleter(new PartyTabComplete());
 
         //config
-
         Config config = new Config("config", this);
         config.loadDefaultConfig();
     }
