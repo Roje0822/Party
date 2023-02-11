@@ -22,12 +22,14 @@ public class PartyMain extends JavaPlugin {
 
     private void init() {
 
+        plugin = this;
+
         //command
         getCommand("파티").setExecutor(new PartyCmd());
         getCommand("파티").setTabCompleter(new PartyTabComplete());
 
         //config
-        plugin = this;
+
         Config config = new Config("config", this);
         config.loadDefaultConfig();
     }
