@@ -13,7 +13,7 @@ public class PartyAPI {
 
     public PartyAPI(Player player) {
         this.player = player;
-        this.config = new Config("data/" + player.getUniqueId(), PartyMain.getPlugin());
+        this.config = new Config("data/" + player.getUniqueId(), PartyMain.getPlugin()); //
     }
 
     public PartyAPI(Player player, String name) {
