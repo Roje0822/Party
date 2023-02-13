@@ -1,8 +1,9 @@
 package net.lucynetwork.party.data;
 
+import net.lucynetwork.lucycore.data.Config;
 import net.lucynetwork.party.PartyMain;
-import net.starly.core.data.Config;
 
+import java.util.Collections;
 import java.util.List;
 
 public class StringData {
@@ -11,7 +12,7 @@ public class StringData {
     private String prefix = config.getString("prefix");
 
     public List<String> usage() {
-        return List.of(prefix + config.getString("messages.usage"));
+        return config.getStringList("messages.usage");
     }
 
 
@@ -74,6 +75,31 @@ public class StringData {
         return prefix + config.getString("messages.party.acceptparty");
     }
 
+    // 파티 정보
+    public String infoPartyPlayer() {
+        return config.getString("messages.party.infoparty.player");
+    }
+
+
+    public String infoPartyName() {
+        return config.getString("messages.party.infoparty.name");
+    }
+
+
+    public String infoPartyOwner() {
+        return config.getString("messages.party.infoparty.partyowner");
+    }
+
+
+    public String infoPartySubOwner() {
+        return config.getString("messages.party.infoparty.partysubpartyowner");
+    }
+
+
+    public String infoPartyMember() {
+        return config.getString("messages.party.infoparty.partymember");
+    }
+
 
 
 
@@ -96,6 +122,12 @@ public class StringData {
     // 파티이름 입력
     public String enterPartyName() {
         return prefix + config.getString("messages.errors.enterpartyname");
+    }
+
+
+    // 잘못된 파티 이름
+    public String wrongPartyName() {
+        return prefix + config.getString("messages.errors.wrongpartyname");
     }
 
 

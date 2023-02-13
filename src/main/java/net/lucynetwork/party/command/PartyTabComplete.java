@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
+import java.util.Collections;
 import java.util.List;
 
 public class PartyTabComplete implements TabCompleter {
@@ -21,16 +22,8 @@ public class PartyTabComplete implements TabCompleter {
                     return List.of(player.getName());
                 }
             }
-        } if (args.length >= 2) {
-            if (args[0].equals("나가기") || args[0].equals("해체") || args[0].equals("수락") || args[0].equals("거절")) {
-                return List.of();
-            }
-        } if (args.length >= 3) {
-            if (args[0].equals("생성") || args[0].equals("추방") || args[0].equals("초대")) {
-                return List.of();
-            }
         }
 
-        return null;
+        return Collections.emptyList();
     }
 }

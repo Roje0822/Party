@@ -13,6 +13,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 
 import javax.annotation.processing.FilerException;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import static net.lucynetwork.party.data.PartyMapData.invitePartyNameMap;
@@ -37,14 +38,20 @@ public class PartyCmd implements CommandExecutor {
                     return true;
                 }
                 partyData = new PartyData(player);
-                player.sendMessage(player.getName() + "님의 파티 정보");
-                player.sendMessage("파티 이름: " + partyData.getPlayerParty());
-                player.sendMessage("파티장: " + Bukkit.getOfflinePlayer(UUID.fromString(partyData.getPartyOwner())).getName());
-                if (partyData.isPartyCoOwnerExist()) player.sendMessage("부파티장: " + Bukkit.getOfflinePlayer(UUID.fromString(partyData.getCoOwner())).getName());
+
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.infoPartyPlayer()
+                        .replace("{player}", player.getName())));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.infoPartyName()
+                        .replace("{partyname}", partyData.getPlayerParty())));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.infoPartyOwner()
+                        .replace("{partyowner}", Bukkit.getOfflinePlayer(UUID.fromString(partyData.getPartyOwner())).getName())));
+                if (partyData.isPartyCoOwnerExist()) player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.infoPartySubOwner()
+                        .replace("{subpartyowner}", Bukkit.getOfflinePlayer(UUID.fromString(partyData.getCoOwner())).getName())));
                 List<String> partyMembers = partyData.getPartyMembers();
                 partyMembers.remove(partyData.getPartyOwner());
                 partyMembers.remove(partyData.getCoOwner());
-                partyMembers.forEach(member -> player.sendMessage("파티원: " + Bukkit.getOfflinePlayer(UUID.fromString(member)).getName()));
+                partyMembers.forEach(member -> player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.infoPartyMember()
+                        .replace("{partymember}", Bukkit.getOfflinePlayer(UUID.fromString(member)).getName()))));
                 return true;
             } else {
 
@@ -58,9 +65,10 @@ public class PartyCmd implements CommandExecutor {
 
                         partyName = args[1];
                         partyData = new PartyData(player, partyName);
+                        String match =  "^[ㄱ-ㅎ가-힣a-zA-Z0-9]*$";
 
-                        if (partyName.contains(">") || partyName.contains("<") || partyName.contains("/") || partyName.contains("\\") || partyName.contains(":") || partyName.contains("*") || partyName.contains("?") || partyName.contains("\"") || partyName.contains("|")) {
-                            player.sendMessage("잘못된 파티 이름입니다");
+                        if (!partyName.matches(match)) {
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.wrongPartyName()));
                             return true;
                         }
                         if (partyData.isPartyNameExist()) {

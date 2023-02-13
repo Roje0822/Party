@@ -2,13 +2,13 @@ plugins {
     id 'java'
 }
 
-group 'net.starly.menu'
+group 'net.starly.party'
 version '1.0'
 
 repositories {
     mavenCentral()
     maven {
-        url = "http://feather-s.kr:8083/repository/maven-public/"
+        url = "http://localhost:8081/repository/maven-public/"
         allowInsecureProtocol = true
     }
 }
@@ -18,8 +18,12 @@ dependencies {
     compileOnly "org.jetbrains:annotations:23.0.0"
 
     //BUKKIT DEPENDENCIES
-    compileOnly "org.spigotmc:spigot-api:R0.1:1.12.2"
+    compileOnly 'org.spigotmc:R0.1:1.19.3A'
 
     // OTHER DEPENDENCIES
-    compileOnly "net.starly.core:ST-Core:1.5.5"
+    compileOnly 'net.lucynetwork:lucycore:1.0.0'
+}
+
+jar {
+    destinationDirectory.set(file('E:\\테스트용 1.19.3\\plugins'))
 }

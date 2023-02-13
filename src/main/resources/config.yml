@@ -6,7 +6,9 @@ prefix: '&7[&bParty&7] &f'
 messages:
 
   #사용법
-  usage: '&c잘못된 명령어 입니다'
+  usage:
+    - '&c잘못된 명령어 입니다'
+    - '하윙~'
 
   #파티
   party:
@@ -38,6 +40,15 @@ messages:
     #수락
     acceptparty: '&a파티 초대를 수락하였습니다.'
 
+    #정보
+    infoparty:
+      player: '&a{player} &6님의 파티정보'
+      name : '&a파티 이름 : &7{partyname}'
+      partyowner: '&b파티장 : &e{partyowner}'
+      subpartyowner: '&b부파티장 : &e{subpartyowner}'
+      partymember: '&b파티원 : &e{partymember}'
+
+
   #에러
   errors:
 
@@ -45,7 +56,10 @@ messages:
     noparty: '&c파티에 참가하지 않았습니다.'
 
     #파티 이름 없음
-    enterpartyname: '파티이름 입력'
+    enterpartyname: '&c파티 이름을 입력하세요'
+
+    #잘못된 파티이름
+    wrongpartyname: '&c잘못된 파티 이름입니다.'
 
     #이미 파티있음
     hasparty: '&c이미 파티가 있습니다.'

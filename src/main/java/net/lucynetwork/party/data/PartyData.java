@@ -1,7 +1,7 @@
 package net.lucynetwork.party.data;
 
+import net.lucynetwork.lucycore.data.Config;
 import net.lucynetwork.party.PartyMain;
-import net.starly.core.data.Config;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -13,8 +13,8 @@ public class PartyData {
 
     private Player player;
     private String name;
-    private Config partyData;
-    private Config playerData;
+    private static Config partyData;
+    private static Config playerData;
     private List<String> partyMembers;
     private StringData config = new StringData();
 
@@ -78,7 +78,7 @@ public class PartyData {
             Config playerData = new Config("data/" + uuid, PartyMain.getPlugin());
             playerData.setString("party", null);
         });
-        partyData.delete();
+        partyData.deleteFile();
     }
 
     /**
@@ -96,7 +96,7 @@ public class PartyData {
     }
 
 
-    public String getCoOwner() {
+    public static String getCoOwner() {
         return partyData.getString("party.coowner");
     }
 
@@ -175,17 +175,17 @@ public class PartyData {
     /**
      * @return 플레이어의 파티
      */
-    public String getPlayerParty() {
+    public static String getPlayerParty() {
         return playerData.getString("party");
     }
 
 
-    public String getPartyOwner() {
+    public static String getPartyOwner() {
         return partyData.getString("party.owner");
     }
 
 
-    public List<String> getPartyMembers() {
+    public static List<String> getPartyMembers() {
         return partyData.getStringList("party.member");
     }
 
@@ -194,11 +194,11 @@ public class PartyData {
      * 파티 삭제
      */
     public void deleteParty() {
-        partyData.delete();
+        partyData.deleteFile();
     }
 
 
-    public Boolean isPartyCoOwnerExist() {
+    public static Boolean isPartyCoOwnerExist() {
         if (partyData.getString("party.coowner") == null) {
             return false;
         } else {

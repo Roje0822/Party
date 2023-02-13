@@ -1,7 +1,7 @@
 package net.lucynetwork.party.api;
 
+import net.lucynetwork.lucycore.data.Config;
 import net.lucynetwork.party.PartyMain;
-import net.starly.core.data.Config;
 import org.bukkit.entity.Player;
 
 import java.util.List;
