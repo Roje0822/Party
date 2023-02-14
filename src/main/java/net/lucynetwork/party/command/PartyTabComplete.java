@@ -14,12 +14,23 @@ public class PartyTabComplete implements TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
 
         if (args.length == 1) {
-            return List.of("생성", "나가기", "해체", "추방", "초대", "수락", "거절");
+            return List.of("생성", "나가기", "해체", "추방", "초대", "수락", "거절", "부파티장");
         } else if (args.length == 2) {
             if (args[0].equals("생성")) return List.of("<파티이름>");
             if (args[0].equals("추방") || args[0].equals("초대")) {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     return List.of(player.getName());
+                }
+            }
+            if (args[0].equals("부파티장")) {
+                return List.of("선임", "해임");
+            }
+        } else if (args.length == 3) {
+            if (args[0].equals("부파티장")) {
+                if (args[1].equals("선임")) {
+                    for (Player player : Bukkit.getOnlinePlayers()) {
+                        return List.of(player.getName());
+                    }
                 }
             }
         }

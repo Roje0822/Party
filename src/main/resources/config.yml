@@ -8,7 +8,6 @@ messages:
   #사용법
   usage:
     - '&c잘못된 명령어 입니다'
-    - '하윙~'
 
   #파티
   party:
@@ -27,6 +26,9 @@ messages:
 
     #추방
     kickparty: '&a파티에서 추방하였습니다.'
+
+    #추방 당함
+    kickedparty: '&a파티에서 추방당하였습니다.'
 
     #초대
     inviteparty: '&a파티 초대를 보냈습니다.'
@@ -47,6 +49,12 @@ messages:
       partyowner: '&b파티장 : &e{partyowner}'
       subpartyowner: '&b부파티장 : &e{subpartyowner}'
       partymember: '&b파티원 : &e{partymember}'
+
+    #부파티장 선임
+    electcoowner: '&a{target}을 {name}파티의 부파티장으로 선임하였습니다.'
+
+    #부파티장 해임
+    dismisscoowner: '&a{target}을 {name}파티의 부파티장에서부터 해임하였습니다.'
 
 
   #에러
@@ -93,6 +101,9 @@ messages:
 
     #자신 추방
     kickself: '&c자신을 추방할 수 없습니다.'
+
+    #파티장이나 부파티장 추방
+    kickpermission: '&c파티장이나 부파티장은 추방할 수 없습니다.'
 
     #파티 주인아님
     notowner: '&c파티의 주인이 아닙니다'

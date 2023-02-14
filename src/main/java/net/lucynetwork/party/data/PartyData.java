@@ -91,12 +91,12 @@ public class PartyData {
     /**
      * 부파티장 해임
      */
-    public void removeCoOwner() {
+    public void dismissCoOwner() {
         partyData.setString("party.coowner", null);
     }
 
 
-    public static String getCoOwner() {
+    public String getCoOwner() {
         return partyData.getString("party.coowner");
     }
 
@@ -180,12 +180,12 @@ public class PartyData {
     }
 
 
-    public static String getPartyOwner() {
+    public String getPartyOwner() {
         return partyData.getString("party.owner");
     }
 
 
-    public static List<String> getPartyMembers() {
+    public List<String> getPartyMembers() {
         return partyData.getStringList("party.member");
     }
 

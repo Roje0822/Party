@@ -92,12 +92,22 @@ public class StringData {
 
 
     public String infoPartySubOwner() {
-        return config.getString("messages.party.infoparty.partysubpartyowner");
+        return config.getString("messages.party.infoparty.subpartyowner");
     }
 
 
     public String infoPartyMember() {
         return config.getString("messages.party.infoparty.partymember");
+    }
+
+
+    public String electCoOwner() {
+        return config.getString("messages.party.electcoowner");
+    }
+
+
+    public String dismissCoOwner() {
+        return config.getString("messages.party.dismisscoowner");
     }
 
 
@@ -186,6 +196,11 @@ public class StringData {
 
     public String kickSelf() {
         return prefix + config.getString("messages.errors.kickself");
+    }
+
+
+    public String kickPermission() {
+        return prefix + config.getString("messages.errors.kickpermission");
     }
 
 
