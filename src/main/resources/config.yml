@@ -1,0 +1,18 @@
+prefix: "&f[ &bParty &f]"
+usage:
+  - "/파티 생성"
+  - "/파티 해산"
+  - "/파티 초대"
+  - "/파티 강퇴"
+  - "/파티 수락"
+  - "/파티 거절"
+
+message:
+  party_create: "{name} 파티를 생성했습니다."
+  party_dismiss: "{name} 파티를 해산했습니다."
+  invite: "{player} 를 초대했습니다."
+  invite_expire: "초대가 만료되었습니다."
+  accept_invite: "초대를 수락했습니다."
+  reject_invite: "초대를 거절했습니다."
+  kick: "{player} 를 추방했습니다"
+  kicked: "파티에서 추방당했습니다"

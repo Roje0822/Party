@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.roje.party'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+    maven {
+        url = "http://localhost:8081/repository/maven-public/"
+        allowInsecureProtocol = true
+    }
+}
+
+dependencies {
+
+    //JAVA DEPENDENCIES
+    compileOnly "org.jetbrains:annotations:23.0.0"
+
+    //BUKKIT DEPENDENCIES
+    compileOnly 'org.spigotmc:spigot-api:1.19.3'
+
+    //OTHER DEPENDENCIES
+    compileOnly 'com.roje:rojelib:1.0.1'
+
+
+}
+
+jar {
+    destinationDirectory.set(file('E:\\테스트서버\\1.19.4\\plugins'))
+}

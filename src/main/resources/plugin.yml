@@ -1,0 +1,14 @@
+name: Party
+main: io.github.roje.PartyMain
+author: Roje
+description: minecraft party plugin
+
+version: 1.0.0
+api-version: 1.19
+
+depend: [ RojeLib ]
+
+commands:
+  party:
+    aliases: [ 파티 ]
+    description: 파티 명령어
